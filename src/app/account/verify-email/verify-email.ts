@@ -45,7 +45,7 @@ export class VerifyEmailComponent implements OnInit {
           this.notificationService.showSuccess('Account verified successfully!');
           localStorage.removeItem('pendingEmail');
 
-          this.router.navigate(['/complete-registration']);
+          this.router.navigate(['/login']);
         },
         error: (err) => {
           console.error('Verification Failed', err);
