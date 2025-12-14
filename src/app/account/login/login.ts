@@ -30,10 +30,8 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.loginService.login(this.loginForm.value).subscribe({
         next: (res) => {
-          // Success Notification
           this.notificationService.showSuccess('Login successful! Redirecting...');
 
-          // Store token if needed
           localStorage.setItem('token', res.token);
 
           setTimeout(() => {
@@ -42,7 +40,6 @@ export class LoginComponent {
         },
         error: (err) => {
           console.error('Login Failed', err);
-          // Error Notification
           const errorMsg = err.error?.message || 'Invalid email or password.';
           this.notificationService.showError(errorMsg);
         },

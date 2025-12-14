@@ -1,213 +1,271 @@
 <div
-  class="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center p-6 transition-colors duration-300 font-['Cairo']"
+  class="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center p-4 sm:p-6 font-['Cairo'] transition-colors duration-300"
 >
-  <div
-    class="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-3xl shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden relative"
-  >
+  <div class="w-full max-w-2xl relative">
     <div
-      class="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-primary-500/10 rounded-full blur-3xl"
+      class="absolute -top-10 -right-10 w-64 h-64 bg-primary-500/20 rounded-full blur-3xl animate-pulse"
     ></div>
     <div
-      class="absolute bottom-0 left-0 -mb-10 -ml-10 w-40 h-40 bg-orange-500/10 rounded-full blur-3xl"
+      class="absolute -bottom-10 -left-10 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl animate-pulse delay-700"
     ></div>
 
-    <div class="p-8 pb-0 text-center relative z-10">
-      <div class="inline-flex items-center justify-center gap-3 mb-6">
-        <div
-          class="w-14 h-14 bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl flex items-center justify-center shadow-lg shadow-primary-500/30"
-        >
-          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-            ></path>
-          </svg>
-        </div>
-        <span
-          class="text-3xl font-bold bg-gradient-to-r from-primary-600 to-orange-500 bg-clip-text text-transparent"
-        >
-          NutriGuide
-        </span>
-      </div>
-      <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-2">Complete Your Profile</h2>
-      <p class="text-gray-500 dark:text-gray-400">
-        Help us calculate your nutritional needs accurately
-      </p>
-    </div>
-
     <div
-      *ngIf="errorMessage"
-      class="mx-8 mt-4 p-4 bg-red-50 border border-red-200 text-red-600 rounded-xl text-sm text-center relative z-10"
+      class="bg-white dark:bg-gray-800 rounded-[2.5rem] shadow-2xl shadow-gray-200/50 dark:shadow-black/50 border border-white/20 dark:border-gray-700 overflow-hidden relative z-10 backdrop-blur-xl"
     >
-      {{ errorMessage }}
-    </div>
-
-    <div class="p-8 relative z-10">
-      <form [formGroup]="completeForm" (ngSubmit)="onSubmit()" class="space-y-6">
-        <div class="group">
-          <label class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">
-            Date of Birth
-          </label>
-          <input
-            type="date"
-            formControlName="birthDate"
-            class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white"
-            [class.border-red-500]="
-              completeForm.get('birthDate')?.invalid && completeForm.get('birthDate')?.touched
-            "
-          />
-
+      <div
+        class="bg-gradient-to-b from-primary-50/50 to-transparent dark:from-gray-700/30 p-8 pb-4 text-center"
+      >
+        <div class="inline-flex items-center justify-center gap-3 mb-6">
           <div
-            *ngIf="completeForm.get('birthDate')?.invalid && completeForm.get('birthDate')?.touched"
-            class="text-red-500 text-xs mt-1 font-semibold"
+            class="w-14 h-14 bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl flex items-center justify-center shadow-lg shadow-primary-500/30"
           >
-            Date of birth is required.
+            <i class="fas fa-leaf text-white text-3xl"></i>
           </div>
-        </div>
-
-        <div>
-          <label class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">
-            Gender
-          </label>
-          <div class="relative">
-            <select
-              formControlName="gender"
-              class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white appearance-none cursor-pointer"
-            >
-              <option value="" disabled selected>Select Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-            </select>
-            <div
-              class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-500"
-            >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 9l-7 7-7-7"
-                ></path>
-              </svg>
-            </div>
-          </div>
-          <div
-            *ngIf="completeForm.get('gender')?.invalid && completeForm.get('gender')?.touched"
-            class="text-red-500 text-xs mt-1 font-semibold"
+          <span
+            class="text-3xl font-bold bg-gradient-to-r from-primary-600 to-primary-500 bg-clip-text text-transparent"
           >
-            Please select your gender.
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">
-              Height (cm)
-            </label>
-            <input
-              type="number"
-              formControlName="height"
-              placeholder="e.g. 175"
-              class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white"
-            />
-
-            <div
-              *ngIf="completeForm.get('height')?.touched && completeForm.get('height')?.invalid"
-              class="text-red-500 text-xs mt-1 font-semibold"
-            >
-              Valid height required (50-300 cm).
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">
-              Weight (kg)
-            </label>
-            <input
-              type="number"
-              formControlName="weight"
-              placeholder="e.g. 75"
-              class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white"
-            />
-
-            <div
-              *ngIf="completeForm.get('weight')?.touched && completeForm.get('weight')?.invalid"
-              class="text-red-500 text-xs mt-1 font-semibold"
-            >
-              Valid weight required (20-500 kg).
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <label class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">
-            Activity Level
-          </label>
-          <div class="relative">
-            <select
-              formControlName="activityLevel"
-              class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white appearance-none cursor-pointer"
-            >
-              <option value="" disabled selected>Select Activity Level</option>
-              <option *ngFor="let level of activityLevels" [value]="level.value">
-                {{ level.label }}
-              </option>
-            </select>
-            <div
-              class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-500"
-            >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 9l-7 7-7-7"
-                ></path>
-              </svg>
-            </div>
-          </div>
-          <div
-            *ngIf="
-              completeForm.get('activityLevel')?.invalid &&
-              completeForm.get('activityLevel')?.touched
-            "
-            class="text-red-500 text-xs mt-1 font-semibold"
-          >
-            Please select an activity level.
-          </div>
-        </div>
-
-        <button
-          type="submit"
-          [disabled]="completeForm.invalid || isSubmitting"
-          class="w-full group relative px-8 py-4 bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed text-white rounded-xl font-bold text-lg shadow-lg shadow-primary-500/30 hover:shadow-primary-500/50 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
-        >
-          <span class="relative z-10 flex items-center justify-center gap-2">
-            <span *ngIf="!isSubmitting">Save & Continue</span>
-            <span *ngIf="isSubmitting">Saving...</span>
-            <svg
-              *ngIf="!isSubmitting"
-              class="w-5 h-5 group-hover:translate-x-1 transition-transform"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M13 7l5 5m0 0l-5 5m5-5H6"
-              ></path>
-            </svg>
+            NutriGuide
           </span>
+        </div>
 
-          <div
-            class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"
-          ></div>
-        </button>
-      </form>
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Setup Your Profile</h1>
+        <p class="text-gray-500 dark:text-gray-400 text-sm max-w-sm mx-auto">
+          Let's customize your experience. These details help us calculate your perfect nutritional
+          plan.
+        </p>
+      </div>
+
+      <div
+        *ngIf="errorMessage"
+        class="mx-8 mb-2 p-4 bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800 text-red-600 dark:text-red-400 rounded-2xl text-sm flex items-center gap-3 animate-bounce-in"
+      >
+        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          ></path>
+        </svg>
+        <span>{{ errorMessage }}</span>
+      </div>
+
+      <div class="p-8 pt-4">
+        <form [formGroup]="completeForm" (ngSubmit)="onSubmit()" class="space-y-6">
+          <div class="group">
+            <label
+              class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2 ml-1"
+            >
+              Date of Birth
+            </label>
+            <div class="relative">
+              <div
+                class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-primary-500 transition-colors"
+              >
+                <i class="fas fa-calendar-alt text-lg"></i>
+              </div>
+              <input
+                type="date"
+                formControlName="birthDate"
+                class="w-full pl-12 pr-4 py-4 bg-gray-50 dark:bg-gray-700/30 border border-gray-200 dark:border-gray-600 rounded-2xl focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all outline-none text-gray-900 dark:text-white placeholder-transparent font-medium"
+                [class.border-red-300]="
+                  completeForm.get('birthDate')?.invalid && completeForm.get('birthDate')?.touched
+                "
+                [class.focus:ring-red-100]="
+                  completeForm.get('birthDate')?.invalid && completeForm.get('birthDate')?.touched
+                "
+              />
+            </div>
+            <p
+              *ngIf="
+                completeForm.get('birthDate')?.invalid && completeForm.get('birthDate')?.touched
+              "
+              class="text-red-500 text-xs mt-2 ml-2 font-medium flex items-center gap-1"
+            >
+              <i class="fas fa-exclamation-circle"></i> Date of birth is required
+            </p>
+          </div>
+
+          <div class="group">
+            <label
+              class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2 ml-1"
+            >
+              Gender
+            </label>
+            <div class="relative">
+              <div
+                class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-primary-500 transition-colors"
+              >
+                <i class="fas fa-venus-mars text-lg"></i>
+              </div>
+              <select
+                formControlName="gender"
+                class="w-full pl-12 pr-10 py-4 bg-gray-50 dark:bg-gray-700/30 border border-gray-200 dark:border-gray-600 rounded-2xl focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all outline-none text-gray-900 dark:text-white appearance-none cursor-pointer font-medium"
+              >
+                <option value="" disabled selected>Select your gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+              <div
+                class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-gray-400"
+              >
+                <i class="fas fa-chevron-down text-xs"></i>
+              </div>
+            </div>
+            <p
+              *ngIf="completeForm.get('gender')?.invalid && completeForm.get('gender')?.touched"
+              class="text-red-500 text-xs mt-2 ml-2 font-medium flex items-center gap-1"
+            >
+              <i class="fas fa-exclamation-circle"></i> Please select gender
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="group">
+              <label
+                class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2 ml-1"
+              >
+                Height
+              </label>
+              <div class="relative">
+                <div
+                  class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-primary-500 transition-colors"
+                >
+                  <i class="fas fa-ruler-vertical text-lg"></i>
+                </div>
+                <input
+                  type="number"
+                  formControlName="height"
+                  placeholder="175"
+                  class="w-full pl-12 pr-12 py-4 bg-gray-50 dark:bg-gray-700/30 border border-gray-200 dark:border-gray-600 rounded-2xl focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all outline-none text-gray-900 dark:text-white font-medium placeholder-gray-300"
+                />
+                <div
+                  class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-gray-400 font-bold text-sm"
+                >
+                  CM
+                </div>
+              </div>
+              <p
+                *ngIf="completeForm.get('height')?.touched && completeForm.get('height')?.invalid"
+                class="text-red-500 text-xs mt-2 ml-2 font-medium"
+              >
+                Valid height (50-300 cm)
+              </p>
+            </div>
+
+            <div class="group">
+              <label
+                class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2 ml-1"
+              >
+                Weight
+              </label>
+              <div class="relative">
+                <div
+                  class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-primary-500 transition-colors"
+                >
+                  <i class="fas fa-weight text-lg"></i>
+                </div>
+                <input
+                  type="number"
+                  formControlName="weight"
+                  placeholder="75"
+                  class="w-full pl-12 pr-12 py-4 bg-gray-50 dark:bg-gray-700/30 border border-gray-200 dark:border-gray-600 rounded-2xl focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all outline-none text-gray-900 dark:text-white font-medium placeholder-gray-300"
+                />
+                <div
+                  class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-gray-400 font-bold text-sm"
+                >
+                  KG
+                </div>
+              </div>
+              <p
+                *ngIf="completeForm.get('weight')?.touched && completeForm.get('weight')?.invalid"
+                class="text-red-500 text-xs mt-2 ml-2 font-medium"
+              >
+                Valid weight (20-500 kg)
+              </p>
+            </div>
+          </div>
+
+          <div class="group">
+            <label
+              class="block text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2 ml-1"
+            >
+              Activity Level
+            </label>
+            <div class="relative">
+              <div
+                class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-400 group-focus-within:text-primary-500 transition-colors"
+              >
+                <i class="fas fa-running text-lg"></i>
+              </div>
+              <select
+                formControlName="activityLevel"
+                class="w-full pl-12 pr-10 py-4 bg-gray-50 dark:bg-gray-700/30 border border-gray-200 dark:border-gray-600 rounded-2xl focus:ring-4 focus:ring-primary-500/10 focus:border-primary-500 transition-all outline-none text-gray-900 dark:text-white appearance-none cursor-pointer font-medium"
+              >
+                <option value="" disabled selected>? How active are you</option>
+                <option *ngFor="let level of activityLevels" [value]="level.value">
+                  {{ level.label }}
+                </option>
+              </select>
+              <div
+                class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-gray-400"
+              >
+                <i class="fas fa-chevron-down text-xs"></i>
+              </div>
+            </div>
+            <p
+              *ngIf="
+                completeForm.get('activityLevel')?.invalid &&
+                completeForm.get('activityLevel')?.touched
+              "
+              class="text-red-500 text-xs mt-2 ml-2 font-medium flex items-center gap-1"
+            >
+              <i class="fas fa-exclamation-circle"></i> Selection required
+            </p>
+          </div>
+
+          <button
+            type="submit"
+            [disabled]="completeForm.invalid || isSubmitting"
+            class="w-full group relative py-4 px-6 bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed text-white rounded-2xl font-bold text-lg shadow-xl shadow-primary-500/30 hover:shadow-primary-500/50 hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+          >
+            <span class="relative z-10 flex items-center justify-center gap-3">
+              <span *ngIf="!isSubmitting">Complete Profile</span>
+              <span *ngIf="isSubmitting">Saving details...</span>
+
+              <i
+                *ngIf="!isSubmitting"
+                class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"
+              ></i>
+              <svg
+                *ngIf="isSubmitting"
+                class="animate-spin h-5 w-5 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"
+                ></circle>
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+            </span>
+
+            <div
+              class="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent z-0"
+            ></div>
+          </button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
