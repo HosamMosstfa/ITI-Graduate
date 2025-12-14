@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterService } from '../services/register/register';
+import { NotificationService } from '../services/notification/notification';
 
 @Component({
   selector: 'app-complete-registration',
@@ -12,10 +13,10 @@ import { RegisterService } from '../services/register/register';
   styleUrls: ['./complete-registration.css'],
 })
 export class CompleteRegistration {
-  // Injections
   private fb = inject(FormBuilder);
   private registerService = inject(RegisterService);
   private router = inject(Router);
+  private notificationService = inject(NotificationService);
 
   completeForm: FormGroup;
   isSubmitting = false;
@@ -42,6 +43,7 @@ export class CompleteRegistration {
   onSubmit() {
     if (this.completeForm.invalid) {
       this.completeForm.markAllAsTouched();
+      this.notificationService.showError('Please fill out all required fields correctly.');
       return;
     }
 
@@ -60,14 +62,18 @@ export class CompleteRegistration {
       )
       .subscribe({
         next: (res) => {
-          console.log('Success:', res);
           this.isSubmitting = false;
-          this.router.navigate(['/home']);
+          this.notificationService.showSuccess('Profile completed successfully!');
+          setTimeout(() => {
+            this.router.navigate(['/home']);
+          }, 1500);
         },
         error: (err) => {
-          console.error('Error:', err);
           this.isSubmitting = false;
-          this.errorMessage = err.error?.message || 'Something went wrong. Please check your data.';
+          const errorMsg =
+            err.error?.message || 'An error occurred while saving data. Please try again.';
+          this.errorMessage = errorMsg;
+          this.notificationService.showError(errorMsg);
         },
       });
   }

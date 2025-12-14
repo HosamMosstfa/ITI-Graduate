@@ -34,7 +34,7 @@ export class LoginComponent {
           this.notificationService.showSuccess('Login successful! Redirecting...');
 
           // Store token if needed
-          // localStorage.setItem('token', res.token);
+          localStorage.setItem('token', res.token);
 
           setTimeout(() => {
             this.router.navigate(['/home']);

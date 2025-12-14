@@ -6,7 +6,7 @@ import { VerifyEmailComponent } from './account/verify-email/verify-email';
 import { ForgotPasswordComponent } from './account/forgot-password/forgot-password';
 import { ResetCodeComponent } from './account/reset-code/reset-code';
 import { NewPasswordComponent } from './account/new-password/new-password';
-import { CompleteRegistrationComponent } from './account/complete-registration/complete-registration';
+import { CompleteRegistration } from './account/complete-registration/complete-registration';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -15,7 +15,7 @@ export const routes: Routes = [
   { path: 'verify-email', component: VerifyEmailComponent },
 
   // Add Complete Registration Route
-  { path: 'complete-registration', component: CompleteRegistrationComponent },
+  { path: 'complete-registration', component: CompleteRegistration },
 
   // Forgot Password Flow
   { path: 'forgot-password', component: ForgotPasswordComponent },
