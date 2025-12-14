@@ -23,11 +23,11 @@ export class CompleteRegistration {
   errorMessage = '';
 
   activityLevels = [
-    { label: 'Sedentary (Little or no exercise)', value: 1.2 },
-    { label: 'Lightly Active (1-3 days/week)', value: 1.375 },
-    { label: 'Moderately Active (3-5 days/week)', value: 1.55 },
-    { label: 'Very Active (6-7 days/week)', value: 1.725 },
-    { label: 'Extra Active (Physical job)', value: 1.9 },
+    { label: 'خامل (تمرين قليل أو معدوم)', value: 1.2 },
+    { label: 'نشيط قليلاً (1-3 أيام/أسبوع)', value: 1.375 },
+    { label: 'نشيط باعتدال (3-5 أيام/أسبوع)', value: 1.55 },
+    { label: 'نشيط جداً (6-7 أيام/أسبوع)', value: 1.725 },
+    { label: 'نشيط للغاية (عمل بدني شاق)', value: 1.9 },
   ];
 
   constructor() {
@@ -43,7 +43,7 @@ export class CompleteRegistration {
   onSubmit() {
     if (this.completeForm.invalid) {
       this.completeForm.markAllAsTouched();
-      this.notificationService.showError('Please fill out all required fields correctly.');
+      this.notificationService.showError('يرجى ملء جميع الحقول المطلوبة بشكل صحيح.');
       return;
     }
 
@@ -63,15 +63,14 @@ export class CompleteRegistration {
       .subscribe({
         next: (res) => {
           this.isSubmitting = false;
-          this.notificationService.showSuccess('Profile completed successfully!');
+          this.notificationService.showSuccess('تم إكمال الملف الشخصي بنجاح!');
           setTimeout(() => {
             this.router.navigate(['/home']);
           }, 1500);
         },
         error: (err) => {
           this.isSubmitting = false;
-          const errorMsg =
-            err.error?.message || 'An error occurred while saving data. Please try again.';
+          const errorMsg = err.error?.message || 'حدث خطأ أثناء حفظ البيانات. حاول مرة أخرى.';
           this.errorMessage = errorMsg;
           this.notificationService.showError(errorMsg);
         },

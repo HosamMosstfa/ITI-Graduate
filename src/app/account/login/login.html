@@ -1,4 +1,7 @@
-<div class="min-h-screen flex items-center justify-center p-4 bg-gray-50 dark:bg-gray-900">
+<div
+  class="min-h-screen flex items-center justify-center p-4 bg-gray-50 dark:bg-gray-900"
+  dir="rtl"
+>
   <div
     class="max-w-md w-full bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700"
   >
@@ -8,25 +11,25 @@
       >
         <i class="fas fa-leaf text-white text-3xl"></i>
       </div>
-      <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-2">Welcome Back</h2>
-      <p class="text-gray-500 dark:text-gray-400 text-sm">Login to continue to NutriGuide</p>
+      <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-2">أهلاً بك مجدداً</h2>
+      <p class="text-gray-500 dark:text-gray-400 text-sm">سجل دخولك للمتابعة إلى NutriGuide</p>
     </div>
 
     <div class="p-8">
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-6">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-6 text-right">
         <div>
           <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-            >Email Address</label
+            >البريد الإلكتروني</label
           >
           <div class="relative">
-            <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <i class="fas fa-envelope text-gray-400"></i>
             </div>
             <input
               type="email"
               formControlName="email"
               placeholder="name@example.com"
-              class="w-full pr-11 pl-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none"
+              class="w-full pl-11 pr-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none"
               [class.ring-2]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
               [class.ring-red-500]="
                 loginForm.get('email')?.invalid && loginForm.get('email')?.touched
@@ -37,30 +40,30 @@
             *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
             class="text-red-500 text-xs mt-1"
           >
-            Please enter a valid email address.
+            يرجى إدخال بريد إلكتروني صحيح.
           </p>
         </div>
 
         <div>
           <div class="flex items-center justify-between mb-2">
             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300"
-              >Password</label
+              >كلمة المرور</label
             >
             <a
               routerLink="/forgot-password"
               class="text-sm text-primary-600 hover:text-primary-700 font-medium transition-colors"
-              >?Forgot Password</a
+              >نسيت كلمة المرور؟</a
             >
           </div>
           <div class="relative">
-            <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <i class="fas fa-lock text-gray-400"></i>
             </div>
             <input
               type="password"
               formControlName="password"
               placeholder="••••••••"
-              class="w-full pr-11 pl-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none"
+              class="w-full pl-11 pr-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none"
               [class.ring-2]="
                 loginForm.get('password')?.invalid && loginForm.get('password')?.touched
               "
@@ -76,16 +79,16 @@
           [disabled]="loginForm.invalid"
           class="w-full py-3.5 bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 text-white font-bold rounded-xl shadow-lg shadow-primary-500/30 transition-all transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Sign In
+          تسجيل الدخول
         </button>
 
         <div class="text-center mt-6">
           <p class="text-sm text-gray-500 dark:text-gray-400">
-            Don't have an account?
+            ليس لديك حساب؟
             <a
               routerLink="/register"
               class="text-primary-600 hover:text-primary-700 font-bold transition-colors"
-              >Register for free</a
+              >سجل مجاناً</a
             >
           </p>
         </div>

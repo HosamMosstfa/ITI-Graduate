@@ -42,14 +42,14 @@ export class VerifyEmailComponent implements OnInit {
 
       this.registerService.verifyEmailCode(email, code).subscribe({
         next: (res) => {
-          this.notificationService.showSuccess('Account verified successfully!');
+          this.notificationService.showSuccess('تم تفعيل الحساب بنجاح! الرجاء تسجيل الدخول.');
           localStorage.removeItem('pendingEmail');
 
           this.router.navigate(['/login']);
         },
         error: (err) => {
           console.error('Verification Failed', err);
-          this.notificationService.showError('Invalid code or email. Please try again.');
+          this.notificationService.showError('الرمز أو البريد غير صحيح. حاول مرة أخرى.');
         },
       });
     } else {
@@ -62,15 +62,15 @@ export class VerifyEmailComponent implements OnInit {
     if (emailToResend) {
       this.registerService.resendVerificationCode(emailToResend).subscribe({
         next: (res) => {
-          this.notificationService.showSuccess('Verification code resent to your email.');
+          this.notificationService.showSuccess('تم إعادة إرسال رمز التحقق إلى بريدك.');
         },
         error: (err) => {
           console.error('Resend Failed', err);
-          this.notificationService.showError('Failed to resend code.');
+          this.notificationService.showError('فشل في إعادة إرسال الرمز.');
         },
       });
     } else {
-      this.notificationService.showInfo('Please ensure the email field is filled.');
+      this.notificationService.showInfo('يرجى التأكد من ملء حقل البريد الإلكتروني.');
     }
   }
 }

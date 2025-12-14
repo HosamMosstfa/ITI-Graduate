@@ -30,7 +30,7 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.loginService.login(this.loginForm.value).subscribe({
         next: (res) => {
-          this.notificationService.showSuccess('Login successful! Redirecting...');
+          this.notificationService.showSuccess('تم تسجيل الدخول بنجاح! جاري التوجيه...');
 
           localStorage.setItem('token', res.token);
 
@@ -40,7 +40,7 @@ export class LoginComponent {
         },
         error: (err) => {
           console.error('Login Failed', err);
-          const errorMsg = err.error?.message || 'Invalid email or password.';
+          const errorMsg = err.error?.message || 'البريد الإلكتروني أو كلمة المرور غير صحيحة.';
           this.notificationService.showError(errorMsg);
         },
       });

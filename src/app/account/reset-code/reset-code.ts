@@ -31,7 +31,7 @@ export class ResetCodeComponent implements OnInit {
     this.email = localStorage.getItem('resetEmail') || '';
     if (!this.email) {
       // Info Notification
-      this.notificationService.showInfo('No email found. Please start over.');
+      this.notificationService.showInfo('لم يتم العثور على بريد إلكتروني. يرجى المحاولة من جديد.');
       this.router.navigate(['/forgot-password']);
     }
   }
@@ -45,14 +45,14 @@ export class ResetCodeComponent implements OnInit {
           localStorage.setItem('resetCode', code);
 
           // Success Notification
-          this.notificationService.showSuccess('Code verified successfully.');
+          this.notificationService.showSuccess('تم التحقق من الرمز بنجاح.');
 
           this.router.navigate(['/new-password']);
         },
         error: (err) => {
           console.error(err);
           // Error Notification
-          this.notificationService.showError('Invalid code.');
+          this.notificationService.showError('الرمز غير صحيح.');
         },
       });
     }

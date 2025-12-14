@@ -1,4 +1,7 @@
-<div class="min-h-screen flex items-center justify-center p-4 bg-gray-50 dark:bg-gray-900 my-8">
+<div
+  class="min-h-screen flex items-center justify-center p-4 bg-gray-50 dark:bg-gray-900 my-8"
+  dir="rtl"
+>
   <div
     class="max-w-2xl w-full bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700"
   >
@@ -7,42 +10,40 @@
         class="hidden md:block w-2/5 bg-gradient-to-br from-primary-500 to-primary-700 p-8 text-white relative overflow-hidden"
       >
         <div
-          class="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"
+          class="absolute top-0 right-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"
         ></div>
-        <div class="relative z-10 h-full flex flex-col justify-between">
+        <div class="relative z-10 h-full flex flex-col justify-between text-right">
           <div>
             <i class="fas fa-leaf text-4xl mb-4"></i>
             <h3 class="text-2xl font-bold mb-2">NutriGuide</h3>
-            <p class="text-primary-100 text-sm">Join us and start your healthy journey today.</p>
+            <p class="text-primary-100 text-sm">انضم إلينا وابدأ رحلتك الصحية اليوم.</p>
           </div>
-          <div class="text-sm text-primary-100/80">&copy; 2025 All Rights Reserved</div>
+          <div class="text-sm text-primary-100/80">&copy; 2025 جميع الحقوق محفوظة</div>
         </div>
       </div>
 
       <div class="w-full md:w-3/5 p-8">
-        <div class="text-center md:text-left mb-8">
-          <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Create Account</h2>
-          <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">
-            Fill in your details to register
-          </p>
+        <div class="text-center md:text-right mb-8">
+          <h2 class="text-2xl font-bold text-gray-800 dark:text-white">إنشاء حساب جديد</h2>
+          <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">املأ بياناتك للتسجيل</p>
         </div>
 
-        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-4">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-4 text-right">
           <div>
             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-              >Full Name</label
+              >الاسم الكامل</label
             >
             <input
               type="text"
               formControlName="name"
-              placeholder="John Doe"
+              placeholder="الاسم الثلاثي"
               class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition-all"
             />
           </div>
 
           <div>
             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-              >Email Address</label
+              >البريد الإلكتروني</label
             >
             <input
               type="email"
@@ -54,28 +55,27 @@
 
           <div>
             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-              >Phone Number</label
+              >رقم الهاتف</label
             >
             <input
               type="tel"
               formControlName="phone"
-              placeholder="+20 1xxxxxxxxx"
-              class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition-all"
+              placeholder="01xxxxxxxxx"
+              class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition-all text-right"
+              dir="ltr"
             />
           </div>
 
           <div>
             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-              >Password</label
+              >كلمة المرور</label
             >
             <input
               type="password"
               formControlName="password"
               class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary-500 outline-none transition-all"
             />
-            <p class="text-xs text-gray-400 mt-1">
-              Must contain 1 uppercase, 1 number, and 1 special char.
-            </p>
+            <p class="text-xs text-gray-400 mt-1">يجب أن تحتوي على حرف كبير، رقم، وحرف خاص.</p>
           </div>
 
           <button
@@ -83,14 +83,14 @@
             [disabled]="registerForm.invalid"
             class="w-full mt-4 py-3.5 bg-gradient-to-r from-primary-600 to-primary-500 text-white font-bold rounded-xl shadow-lg shadow-primary-500/30 hover:shadow-xl transition-all disabled:opacity-50"
           >
-            Sign Up
+            تسجيل حساب
           </button>
 
           <div class="text-center mt-4">
             <p class="text-sm text-gray-500">
-              Already have an account?
+              لديك حساب بالفعل؟
               <a routerLink="/login" class="text-primary-600 hover:text-primary-700 font-bold"
-                >Sign In</a
+                >تسجيل الدخول</a
               >
             </p>
           </div>

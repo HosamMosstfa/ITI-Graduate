@@ -33,8 +33,7 @@ export class RegisterComponent {
       this.registerService.registerUser(this.registerForm.value).subscribe({
         next: (res) => {
           // Success Notification
-          this.notificationService.showSuccess('Account created! Please verify your email.');
-
+          this.notificationService.showSuccess('تم إنشاء الحساب! يرجى التحقق من بريدك الإلكتروني.');
           localStorage.setItem('pendingEmail', this.registerForm.get('email')?.value);
           this.router.navigate(['/verify-email']);
         },
@@ -42,7 +41,7 @@ export class RegisterComponent {
           console.error('Full Error Object:', err);
 
           // Handle Error Message Logic
-          let errorMessage = 'Registration failed.';
+          let errorMessage = 'فشل التسجيل.';
 
           if (typeof err.error === 'string') {
             errorMessage = err.error;

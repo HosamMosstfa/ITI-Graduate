@@ -1,4 +1,7 @@
-<div class="min-h-screen flex items-center justify-center p-4 bg-gray-50 dark:bg-gray-900">
+<div
+  class="min-h-screen flex items-center justify-center p-4 bg-gray-50 dark:bg-gray-900"
+  dir="rtl"
+>
   <div
     class="max-w-md w-full bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700"
   >
@@ -8,29 +11,30 @@
       >
         <i class="fas fa-envelope-open-text text-white text-3xl"></i>
       </div>
-      <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-2">Account Verification</h2>
+      <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-2">تفعيل الحساب</h2>
       <p class="text-gray-500 dark:text-gray-400 text-sm">
-        We sent a code to your email. Enter it below to activate your account.
+        أرسلنا رمزاً إلى بريدك الإلكتروني. أدخله أدناه لتفعيل حسابك.
       </p>
     </div>
 
     <div class="p-8">
-      <form [formGroup]="verifyForm" (ngSubmit)="onSubmit()" class="space-y-5">
+      <form [formGroup]="verifyForm" (ngSubmit)="onSubmit()" class="space-y-5 text-right">
         <div>
           <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-            >Email Address</label
+            >البريد الإلكتروني</label
           >
           <input
             type="email"
             formControlName="email"
             readonly
-            class="w-full px-4 py-3 bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-500 rounded-xl cursor-not-allowed"
+            class="w-full px-4 py-3 bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-gray-500 rounded-xl cursor-not-allowed text-left"
+            dir="ltr"
           />
         </div>
 
         <div>
           <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
-            >Verification Code</label
+            >رمز التحقق</label
           >
           <input
             type="text"
@@ -46,7 +50,7 @@
             *ngIf="verifyForm.get('code')?.invalid && verifyForm.get('code')?.touched"
             class="text-red-500 text-xs mt-1 text-center"
           >
-            Verification code is required.
+            رمز التحقق مطلوب.
           </p>
         </div>
 
@@ -55,7 +59,7 @@
           [disabled]="verifyForm.invalid"
           class="w-full py-3.5 bg-gradient-to-r from-primary-600 to-primary-500 text-white font-bold rounded-xl shadow-lg shadow-primary-500/30 transition-all hover:-translate-y-0.5 disabled:opacity-50"
         >
-          Verify Account
+          تفعيل الحساب
         </button>
 
         <div class="text-center pt-2">
@@ -64,7 +68,7 @@
             (click)="resendCode()"
             class="text-sm text-primary-600 hover:text-primary-700 font-medium transition-colors"
           >
-            Didn't receive the code? Resend
+            لم تستلم الرمز؟ إعادة إرسال
           </button>
         </div>
       </form>

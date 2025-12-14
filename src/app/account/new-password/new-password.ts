@@ -34,7 +34,7 @@ export class NewPasswordComponent implements OnInit {
 
     if (!this.email || !this.code) {
       // Info Notification
-      this.notificationService.showInfo('Session expired. Please start over.');
+      this.notificationService.showInfo('انتهت صلاحية الجلسة. يرجى البدء من جديد.');
       this.router.navigate(['/forgot-password']);
     }
   }
@@ -52,8 +52,9 @@ export class NewPasswordComponent implements OnInit {
       this.loginService.resetPassword(resetData).subscribe({
         next: (res) => {
           // Success Notification
-          this.notificationService.showSuccess('Password reset successfully! You can now login.');
-
+          this.notificationService.showSuccess(
+            'تم تغيير كلمة المرور بنجاح! يمكنك الآن تسجيل الدخول.'
+          );
           localStorage.removeItem('resetEmail');
           localStorage.removeItem('resetCode');
 
@@ -62,7 +63,7 @@ export class NewPasswordComponent implements OnInit {
         error: (err) => {
           console.error(err);
           // Error Notification
-          this.notificationService.showError('Failed to reset password.');
+          this.notificationService.showError('فشل تغيير كلمة المرور.');
         },
       });
     }

@@ -34,14 +34,16 @@ export class ForgotPasswordComponent {
           localStorage.setItem('resetEmail', email);
 
           // Success Notification
-          this.notificationService.showSuccess('Reset code sent to your email.');
+          this.notificationService.showSuccess('تم إرسال رمز إعادة التعيين إلى بريدك الإلكتروني.');
 
           this.router.navigate(['/reset-code']);
         },
         error: (err) => {
           console.error(err);
           // Error Notification
-          this.notificationService.showError('Error sending code. Please check the email.');
+          this.notificationService.showError(
+            'حدث خطأ أثناء إرسال الرمز. يرجى التحقق من البريد الإلكتروني.'
+          );
         },
       });
     }
