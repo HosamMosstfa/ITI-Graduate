@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,27 +7,55 @@ import { Observable } from 'rxjs';
 })
 export class RegisterService {
   private http = inject(HttpClient);
-  private baseUrl = 'http://localhost:8888/api/Users';
+
+  private usersUrl = 'http://localhost:8888/api/Users';
+
+  private customersUrl = 'http://localhost:8888/api/Customers';
+
+  // ----------------- Auth Methods -----------------
 
   // 1. Register New User
   registerUser(userData: any): Observable<any> {
-    // Ensuring the role is always "Customer" as per requirements
     userData.role = 'Customer';
-    return this.http.post(`${this.baseUrl}/register`, userData);
+    return this.http.post(`${this.usersUrl}/register`, userData);
   }
 
   // 2. Verify Email Code
   verifyEmailCode(email: string, code: string): Observable<any> {
     const body = { email, code };
-    return this.http.post(`${this.baseUrl}/verify-email-code`, body);
+    return this.http.post(`${this.usersUrl}/verify-email-code`, body);
   }
 
   // 3. Resend Verification Code
-  // Note: Based on Swagger, it takes a string. We send it as JSON string or raw string depending on backend config.
-  // Usually .NET accepts object keys, but if it's strictly [FromBody] string, we send it like this:
   resendVerificationCode(email: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}/resend-code-Verification`, JSON.stringify(email), {
+    return this.http.post(`${this.usersUrl}/resend-code-Verification`, JSON.stringify(email), {
       headers: { 'Content-Type': 'application/json' },
     });
+  }
+
+  // ----------------- Profile Methods -----------------
+
+  addCustomer(
+    birthDate: string,
+    gender: string,
+    weight: number,
+    height: number,
+    activityLevel: number
+  ): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    });
+
+    const body = {
+      birthDate: birthDate,
+      gender: gender,
+      weight: weight,
+      height: height,
+      activityLevel: activityLevel,
+    };
+
+    return this.http.post(`${this.customersUrl}/addCustomer`, body, { headers });
   }
 }

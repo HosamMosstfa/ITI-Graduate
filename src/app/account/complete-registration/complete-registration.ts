@@ -1,32 +1,35 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CustomerService } from '../services/customer/customer';
-import Swal from 'sweetalert2';
+import { RegisterService } from '../services/register/register';
 
 @Component({
   selector: 'app-complete-registration',
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './complete-registration.html',
   styleUrls: ['./complete-registration.css'],
 })
-export class CompleteRegistrationComponent {
-  completeForm: FormGroup;
+export class CompleteRegistration {
+  // Injections
+  private fb = inject(FormBuilder);
+  private registerService = inject(RegisterService);
+  private router = inject(Router);
 
-  // Activity Levels (English) matching your logic
+  completeForm: FormGroup;
+  isSubmitting = false;
+  errorMessage = '';
+
   activityLevels = [
     { label: 'Sedentary (Little or no exercise)', value: 1.2 },
-    { label: 'Lightly Active (Light exercise 1-3 days/week)', value: 1.375 },
-    { label: 'Moderately Active (Moderate exercise 3-5 days/week)', value: 1.55 },
-    { label: 'Very Active (Hard exercise 6-7 days/week)', value: 1.725 },
-    { label: 'Extra Active (Very hard exercise & physical job)', value: 1.9 },
+    { label: 'Lightly Active (1-3 days/week)', value: 1.375 },
+    { label: 'Moderately Active (3-5 days/week)', value: 1.55 },
+    { label: 'Very Active (6-7 days/week)', value: 1.725 },
+    { label: 'Extra Active (Physical job)', value: 1.9 },
   ];
 
-  constructor(
-    private fb: FormBuilder,
-    private customerService: CustomerService,
-    private router: Router
-  ) {
-    // Form matches the Swagger Request Body keys exactly
+  constructor() {
     this.completeForm = this.fb.group({
       birthDate: ['', Validators.required],
       gender: ['', Validators.required],
@@ -37,34 +40,35 @@ export class CompleteRegistrationComponent {
   }
 
   onSubmit() {
-    if (this.completeForm.valid) {
-      this.customerService.addCustomer(this.completeForm.value).subscribe({
+    if (this.completeForm.invalid) {
+      this.completeForm.markAllAsTouched();
+      return;
+    }
+
+    this.isSubmitting = true;
+    this.errorMessage = '';
+
+    const val = this.completeForm.value;
+
+    this.registerService
+      .addCustomer(
+        val.birthDate,
+        val.gender,
+        Number(val.weight),
+        Number(val.height),
+        Number(val.activityLevel)
+      )
+      .subscribe({
         next: (res) => {
-          Swal.fire({
-            title: 'Profile Completed!',
-            text: 'Your data has been saved successfully.',
-            icon: 'success',
-            confirmButtonText: 'Go to Home',
-            confirmButtonColor: '#22c55e', // Matching your primary-500 color
-          }).then((result) => {
-            if (result.isConfirmed) {
-              this.router.navigate(['/home']);
-            }
-          });
+          console.log('Success:', res);
+          this.isSubmitting = false;
+          this.router.navigate(['/home']);
         },
         error: (err) => {
-          console.error('API Error:', err);
-          Swal.fire({
-            title: 'Error!',
-            text: 'Something went wrong while saving your data.',
-            icon: 'error',
-            confirmButtonText: 'Try Again',
-            confirmButtonColor: '#ef4444',
-          });
+          console.error('Error:', err);
+          this.isSubmitting = false;
+          this.errorMessage = err.error?.message || 'Something went wrong. Please check your data.';
         },
       });
-    } else {
-      this.completeForm.markAllAsTouched();
-    }
   }
 }

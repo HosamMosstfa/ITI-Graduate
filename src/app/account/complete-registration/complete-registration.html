@@ -1,97 +1,213 @@
-<!-- <div
-  class="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center p-6 font-['Cairo'] transition-colors duration-300"
+<div
+  class="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center p-6 transition-colors duration-300 font-['Cairo']"
 >
   <div
-    class="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden"
+    class="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-3xl shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden relative"
   >
-    <div class="bg-gradient-to-r from-primary-500 to-primary-600 p-8 text-center">
-      <h2 class="text-3xl font-bold text-white mb-2">Complete Your Profile</h2>
-      <p class="text-primary-100">Help us calculate your nutritional needs accurately</p>
+    <div
+      class="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-primary-500/10 rounded-full blur-3xl"
+    ></div>
+    <div
+      class="absolute bottom-0 left-0 -mb-10 -ml-10 w-40 h-40 bg-orange-500/10 rounded-full blur-3xl"
+    ></div>
+
+    <div class="p-8 pb-0 text-center relative z-10">
+      <div class="inline-flex items-center justify-center gap-3 mb-6">
+        <div
+          class="w-14 h-14 bg-gradient-to-br from-primary-500 to-primary-600 rounded-2xl flex items-center justify-center shadow-lg shadow-primary-500/30"
+        >
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+            ></path>
+          </svg>
+        </div>
+        <span
+          class="text-3xl font-bold bg-gradient-to-r from-primary-600 to-orange-500 bg-clip-text text-transparent"
+        >
+          NutriGuide
+        </span>
+      </div>
+      <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-2">Complete Your Profile</h2>
+      <p class="text-gray-500 dark:text-gray-400">
+        Help us calculate your nutritional needs accurately
+      </p>
     </div>
 
-    <div class="p-8">
+    <div
+      *ngIf="errorMessage"
+      class="mx-8 mt-4 p-4 bg-red-50 border border-red-200 text-red-600 rounded-xl text-sm text-center relative z-10"
+    >
+      {{ errorMessage }}
+    </div>
+
+    <div class="p-8 relative z-10">
       <form [formGroup]="completeForm" (ngSubmit)="onSubmit()" class="space-y-6">
-        <div>
-          <label class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300"
-            >Date of Birth</label
-          >
+        <div class="group">
+          <label class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">
+            Date of Birth
+          </label>
           <input
             type="date"
             formControlName="birthDate"
-            class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white"
+            class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white"
+            [class.border-red-500]="
+              completeForm.get('birthDate')?.invalid && completeForm.get('birthDate')?.touched
+            "
           />
 
           <div
             *ngIf="completeForm.get('birthDate')?.invalid && completeForm.get('birthDate')?.touched"
-            class="text-red-500 text-sm mt-1"
+            class="text-red-500 text-xs mt-1 font-semibold"
           >
             Date of birth is required.
           </div>
         </div>
 
         <div>
-          <label class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300"
-            >Gender</label
+          <label class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">
+            Gender
+          </label>
+          <div class="relative">
+            <select
+              formControlName="gender"
+              class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white appearance-none cursor-pointer"
+            >
+              <option value="" disabled selected>Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+            <div
+              class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-500"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </div>
+          </div>
+          <div
+            *ngIf="completeForm.get('gender')?.invalid && completeForm.get('gender')?.touched"
+            class="text-red-500 text-xs mt-1 font-semibold"
           >
-          <select
-            formControlName="gender"
-            class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white"
-          >
-            <option value="" disabled selected>Select Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-          </select>
+            Please select your gender.
+          </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <label class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300"
-              >Height (cm)</label
-            >
+            <label class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">
+              Height (cm)
+            </label>
             <input
               type="number"
               formControlName="height"
               placeholder="e.g. 175"
-              class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white"
+              class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white"
             />
+
+            <div
+              *ngIf="completeForm.get('height')?.touched && completeForm.get('height')?.invalid"
+              class="text-red-500 text-xs mt-1 font-semibold"
+            >
+              Valid height required (50-300 cm).
+            </div>
           </div>
 
           <div>
-            <label class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300"
-              >Weight (kg)</label
-            >
+            <label class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">
+              Weight (kg)
+            </label>
             <input
               type="number"
               formControlName="weight"
               placeholder="e.g. 75"
-              class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white"
+              class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white"
             />
+
+            <div
+              *ngIf="completeForm.get('weight')?.touched && completeForm.get('weight')?.invalid"
+              class="text-red-500 text-xs mt-1 font-semibold"
+            >
+              Valid weight required (20-500 kg).
+            </div>
           </div>
         </div>
 
         <div>
-          <label class="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300"
-            >Activity Level</label
+          <label class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">
+            Activity Level
+          </label>
+          <div class="relative">
+            <select
+              formControlName="activityLevel"
+              class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white appearance-none cursor-pointer"
+            >
+              <option value="" disabled selected>Select Activity Level</option>
+              <option *ngFor="let level of activityLevels" [value]="level.value">
+                {{ level.label }}
+              </option>
+            </select>
+            <div
+              class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-gray-500"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </div>
+          </div>
+          <div
+            *ngIf="
+              completeForm.get('activityLevel')?.invalid &&
+              completeForm.get('activityLevel')?.touched
+            "
+            class="text-red-500 text-xs mt-1 font-semibold"
           >
-          <select
-            formControlName="activityLevel"
-            class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all outline-none text-gray-900 dark:text-white"
-          >
-            <option value="" disabled selected>Select Activity Level</option>
-            <option *ngFor="let level of activityLevels" [value]="level.value">
-              {{ level.label }}
-            </option>
-          </select>
+            Please select an activity level.
+          </div>
         </div>
 
         <button
           type="submit"
-          [disabled]="completeForm.invalid"
-          class="w-full px-8 py-4 bg-primary-500 hover:bg-primary-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+          [disabled]="completeForm.invalid || isSubmitting"
+          class="w-full group relative px-8 py-4 bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-700 hover:to-primary-600 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed text-white rounded-xl font-bold text-lg shadow-lg shadow-primary-500/30 hover:shadow-primary-500/50 transition-all duration-300 transform hover:-translate-y-1 overflow-hidden"
         >
-          Save & Continue
+          <span class="relative z-10 flex items-center justify-center gap-2">
+            <span *ngIf="!isSubmitting">Save & Continue</span>
+            <span *ngIf="isSubmitting">Saving...</span>
+            <svg
+              *ngIf="!isSubmitting"
+              class="w-5 h-5 group-hover:translate-x-1 transition-transform"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 7l5 5m0 0l-5 5m5-5H6"
+              ></path>
+            </svg>
+          </span>
+
+          <div
+            class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"
+          ></div>
         </button>
       </form>
     </div>
   </div>
-</div> -->
+</div>

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterService } from '../services/register/register';
-import { NotificationService } from '../../account/services/notification/notification'; // Import Notification Service
+import { NotificationService } from '../../account/services/notification/notification';
 
 @Component({
   selector: 'app-verify-email',
@@ -19,7 +19,7 @@ export class VerifyEmailComponent implements OnInit {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private registerService = inject(RegisterService);
-  private notificationService = inject(NotificationService); // Inject Service
+  private notificationService = inject(NotificationService);
 
   constructor() {
     this.verifyForm = this.fb.group({
@@ -42,15 +42,13 @@ export class VerifyEmailComponent implements OnInit {
 
       this.registerService.verifyEmailCode(email, code).subscribe({
         next: (res) => {
-          // Success Notification
           this.notificationService.showSuccess('Account verified successfully!');
-
           localStorage.removeItem('pendingEmail');
-          this.router.navigate(['/login']);
+
+          this.router.navigate(['/complete-registration']);
         },
         error: (err) => {
           console.error('Verification Failed', err);
-          // Error Notification
           this.notificationService.showError('Invalid code or email. Please try again.');
         },
       });
@@ -61,21 +59,17 @@ export class VerifyEmailComponent implements OnInit {
 
   resendCode() {
     const emailToResend = this.verifyForm.get('email')?.value;
-
     if (emailToResend) {
       this.registerService.resendVerificationCode(emailToResend).subscribe({
         next: (res) => {
-          // Success Notification
           this.notificationService.showSuccess('Verification code resent to your email.');
         },
         error: (err) => {
           console.error('Resend Failed', err);
-          // Error Notification
           this.notificationService.showError('Failed to resend code.');
         },
       });
     } else {
-      // Info Notification
       this.notificationService.showInfo('Please ensure the email field is filled.');
     }
   }

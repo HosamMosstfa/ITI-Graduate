@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CustomerService {
-  // URL matches the Swagger image provided
   private apiUrl = 'http://localhost:8888/api/Customers/addCustomer';
 
   constructor(private http: HttpClient) {}
